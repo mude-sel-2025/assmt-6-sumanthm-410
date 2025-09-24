@@ -1,8 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import scipy.stats as stats
 from scipy.stats import norm
 
-def confidence_interval(N_samples=100, sample_size=30, true_mean=67, true_std=10, confidence=0.95):
+def confidence_interval(N_samples=40, sample_size=30, true_mean=78, confidence=0.95,confidence_level=0.95):
     """
     Demonstrates 95% confidence intervals for the mean.
     Parameters:
@@ -12,11 +13,13 @@ def confidence_interval(N_samples=100, sample_size=30, true_mean=67, true_std=10
     - true_std: True population standard deviation
     - confidence: Confidence level (default 0.95)
     """
+    true_var = 0.15 * true_mean
+    true_std = np.sqrt(true_var)
     
     # WRITE_YOUR_CODE HERE TO COMPUTE THE Z VALUE
     # Z value for the two-tailed confidence interval
-    alpha = 
-    z = 
+    alpha = 1 - confidence_level
+    z = stats.norm.ppf(1 - alpha / 2)
     # this code block ends here
 
     # Store the lower and upper bounds of each CI
@@ -31,11 +34,12 @@ def confidence_interval(N_samples=100, sample_size=30, true_mean=67, true_std=10
         sample = np.random.normal(loc=true_mean, scale=true_std, size=sample_size)
 
         # WRITE_YOUR_CODE HERE TO COMPUTE SAMPLE MEAN, SAMPLE STANDARD ERROR, AND CI BOUNDS
-        sample_mean = 
-        sample_se = 
+        sample_mean =np.mean(sample)
+        sample_se = np.std(sample, ddof=1) / np.sqrt(sample_size)
+        margin_of_error = z * sample_se
         
-        lower = 
-        upper = 
+        lower = sample_mean - margin_of_error   
+        upper = sample_mean + margin_of_error
         # this code block ends here
 
         # append to CI lists        
@@ -43,7 +47,7 @@ def confidence_interval(N_samples=100, sample_size=30, true_mean=67, true_std=10
         ci_uppers.append(upper)
         
         # WRITE_YOUR_CODE HERE TO CHECK IF THE TRUE MEAN IS WITHIN THE CI, INCREMENT misses IF NOT
-        if 
+        if not (lower <= true_mean <= upper):
             misses += 1
         # this code block ends here
     
@@ -52,7 +56,7 @@ def confidence_interval(N_samples=100, sample_size=30, true_mean=67, true_std=10
     for i, (low, up) in enumerate(zip(ci_lowers, ci_uppers)):
 
         # WRITE_YOUR_CODE HERE TO cOLOR THE INTERVALS THAT MISS THE TRUE MEAN IN RED, OTHERS IN BLUE
-        color = 
+        color = 'blue' if low <= true_mean <= up else 'red'
         # this code block ends here
 
         plt.plot([low, up], [i, i], color=color, lw=2)
@@ -67,8 +71,8 @@ def confidence_interval(N_samples=100, sample_size=30, true_mean=67, true_std=10
     plt.show()
     
     # WRITE_YOUR_CODE HERE TO PRINT THE NUMBER OF MISSES AND THE PERCENTAGE
-    print(f"Out of {} intervals, {} did NOT contain the true mean.")
-    print(f"This is roughly {}%, close to the expected 5% for a 95% CI.")
+    print(f"Out of {N_samples} intervals, {misses} did NOT contain the true mean.")
+    print(f"This is roughly {(misses/N_samples)*100}%, close to the expected 5% for a 95% CI.")
     # this code block ends here
 
 # ================================
