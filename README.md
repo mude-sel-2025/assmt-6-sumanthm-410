@@ -10,9 +10,12 @@ Course: CV5100 – Modelling, Uncertainty, and Data for Engineers
 
 *Due: `Monday, Sep 28, 2025`*
 
+Checked by Ishaan 98/100
+
 🚀 Overview
 
 This repository contains Assignment 6 covering CLT and CI.  
+
 
 
 
