@@ -1,7 +1,7 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/jiasWX1f)
 📘 Assignment 6 – CV5100: MUDE (IIT Madras)
-Evaluated by TA (Chetan K); Score:100/100
 
+Evaluated by TA (Chetan K); Score:100/100
 
 Topic: Central limit theorem, confidence intervals
 
@@ -17,6 +17,7 @@ Checked by Ishaan 98/100
 🚀 Overview
 
 This repository contains Assignment 6 covering CLT and CI.  
+
 
 
 
